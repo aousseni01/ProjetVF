@@ -67,7 +67,7 @@ public class HBoxExemple extends HBox {
 
    private void save(File f) {
        try (BufferedWriter bout = new BufferedWriter(new FileWriter(f))) {
-//           treillis.save(bout);
+           treillis.save(bout);
            this.fichierCourant = f;
        } catch (IOException ex) {
            Alert alert = new Alert(Alert.AlertType.ERROR);
