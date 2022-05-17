@@ -15,6 +15,12 @@
             <artifactId>javafx-controls</artifactId>
             <version>13</version>
         </dependency>
+        <dependency>
+            <groupId>gov.nist.math</groupId>
+            <artifactId>jama</artifactId>
+            <version>1.0.3</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -75,4 +81,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>ProjetVF</name>
 </project>

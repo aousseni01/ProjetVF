@@ -4,9 +4,9 @@
  */
 package fr.insa.papama.td.interfacegraph;
 
-import fr.insa.papama.td.classesprinc.Noeud;
-import fr.insa.papama.td.classesprinc.NoeudSimple;
-import fr.insa.papama.td.classesprinc.Vecteur2D;
+import fr.insa.papama.tp.Noeud;
+import fr.insa.papama.tp.NoeudSimple;
+import fr.insa.papama.tp.Vecteur2D;
 import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
