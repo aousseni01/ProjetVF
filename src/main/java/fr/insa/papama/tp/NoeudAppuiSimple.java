@@ -4,6 +4,9 @@
  */
 package fr.insa.papama.tp;
 
+import javafx.scene.Group;
+import javafx.scene.shape.Ellipse;
+
 /**
  *
  * @author Haimavati
@@ -29,5 +32,11 @@ public class NoeudAppuiSimple extends NoeudAppui {
        return ("NoeudAppuisSimple"+super.getId()+" = ("+super.getPx()+";"+super.getPy()+"), " +super.getF()+"Angle de la normale"+this.normale); 
    }
    
+   @Override
+   public Group dessine() {
+        Ellipse rep = new Ellipse(this.getPx(), this.getPy(), 5, 8);
+         Group l = new Group(rep);
+         return l;
+       }
     
 }

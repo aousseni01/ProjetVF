@@ -5,7 +5,7 @@
  */
 package fr.insa.papama.td.interfacegraph;
 
-import javafx.scene.control.Button;
+import fr.insa.papama.tp.Treillis;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -16,8 +16,12 @@ public class MainPanel extends BorderPane{
     private HBoxExemple outilsTop;
     private VBoxExemple outilsLeft;
     private DessinPane dessin;
+    private Treillis model;
+    private Controleur control;
     
-    public MainPanel() {
+    public MainPanel(Treillis model) {
+        this.control = new Controleur(this);
+        this.model = model;
         this.outilsTop = new HBoxExemple();
         this.outilsLeft = new VBoxExemple(); 
         this.dessin = new DessinPane(this);
@@ -25,7 +29,29 @@ public class MainPanel extends BorderPane{
         this.setTop(this.outilsTop);
         this.setLeft(this.outilsLeft);
     }
+    public Treillis getModel(){
+        return model;
+    }
 
+    /**
+     * @return the outilsTop
+     */
+    public HBoxExemple getOutilsTop() {
+        return outilsTop;
+    }
 
+    /**
+     * @return the outilsLeft
+     */
+    public VBoxExemple getOutilsLeft() {
+        return outilsLeft;
+    }
 
+    public Controleur getControleur(){
+        return control;
+    }
+
+    public void redrawAll(){
+        this.dessin.redrawAll();
+    }
 }

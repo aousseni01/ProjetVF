@@ -9,6 +9,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import java.util.ArrayList;
+import javafx.scene.Group;
 
 /**
  *
@@ -251,6 +252,37 @@ public class Treillis {
         } else {
             return i;
         }
+    }
+    public Noeud noeudPlusProche(double x, double y, double distMax) {
+        if (this.noeuds.isEmpty())
+            return null;
+        else {
+            Noeud nmin = this.noeuds.get(0);
+            double distmin = nmin.distance(x, y);
+            for (int i=1; i < this.noeuds.size(); i++){
+                Noeud n = this.noeuds.get(i);
+                double dist = n.distance(x, y);
+                if (dist < distmin){
+                    distmin = dist;
+                    nmin = n;
+                }
+            }
+            if (distmin <= distMax){
+                return nmin;
+            } else {
+                return null;
+            }
+        }
+    }
+    public Group dessine() {
+        Group g = new Group();
+        for (int i=0; i < this.noeuds.size(); i++) {
+            g.getChildren().add(this.noeuds.get(i).dessine());
+        }
+        for (int i=0; i < this.barres.size(); i++) {
+            g.getChildren().add(this.barres.get(i).dessine());
+        }
+        return g;
     }
 }
 

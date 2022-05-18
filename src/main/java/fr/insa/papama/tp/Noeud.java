@@ -5,6 +5,7 @@
 package fr.insa.papama.tp;
 
 import java.util.ArrayList;
+import javafx.scene.Group;
 
 /**
  *
@@ -25,7 +26,7 @@ public abstract class Noeud {
         return px; 
     }
         
-    public void setPx(int px) {
+    public void setPx(double px) {
         this.px=px; 
     }
     
@@ -33,7 +34,7 @@ public abstract class Noeud {
         return py;
     }
     
-    public void setPy(int py){
+    public void setPy(double py){
         this.py=py; 
     }
 
@@ -134,5 +135,11 @@ public abstract class Noeud {
         barresIncidentes.addAll(this.getBarresDepart());
         return barresIncidentes;
     }
-
+    public double distance (double x, double y){
+        double dx = this.px -x;
+        double dy = this.px -y;
+        return Math.sqrt(dx*dx+dy*dy);
+    }
+    
+    public abstract Group dessine();
 }

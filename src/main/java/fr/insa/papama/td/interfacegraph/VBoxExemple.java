@@ -53,5 +53,34 @@ public class VBoxExemple extends VBox {
         this.getChildren().add(bar); 
 
     }
+
+    /**
+     * @return the noeudSimple
+     */
+    public MenuItem getNoeudSimple() {
+        return noeudSimple;
+    }
+
+    /**
+     * @return the noeudAppuiSimple
+     */
+    public MenuItem getNoeudAppuiSimple() {
+        return noeudAppuiSimple;
+    }
+
+    /**
+     * @return the noeudAppuiDouble
+     */
+    public MenuItem getNoeudAppuiDouble() {
+        return noeudAppuiDouble;
+    }
+
+    /**
+     * @return the barre
+     */
+    public Button getBarre() {
+        return barre;
+    }
+    
 }
 

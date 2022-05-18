@@ -5,6 +5,8 @@
 package fr.insa.papama.tp;
 
 import static java.lang.Math.atan;
+import javafx.scene.Group;
+import javafx.scene.shape.Line;
 
 /**
  *
@@ -27,6 +29,9 @@ public class Barre {
         this.tractionMax=tractionMax;
         this.compressionMax=compressionMax; 
         this.cout=cout;
+    }
+    public Barre (Noeud noeudDepart, Noeud noeudArrivee){
+        this(-1, noeudDepart, noeudArrivee, 0, 0, 0);
     }
     
     //Méthode toString
@@ -152,4 +157,10 @@ public class Barre {
         return angle; 
     }
     
+   
+    public Group dessine(){
+        Line res = new Line(this.getNoeudDepart().getPx(), this.getNoeudDepart().getPy(), this.getNoeudArrivee().getPx(), this.getNoeudArrivee().getPy());
+        Group g = new Group(res);
+        return g;
+    }
 }
