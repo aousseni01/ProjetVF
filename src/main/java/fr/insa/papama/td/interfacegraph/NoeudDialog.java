@@ -28,6 +28,10 @@ public class NoeudDialog extends Dialog<Noeud> {
    private TextField py;
    private TextField vx;
    private TextField vy;
+   
+   public NoeudDialog() {
+       this(null,null);
+   }
 
    public NoeudDialog(Noeud noeud, MouseEvent t){
        if (noeud != null) {
@@ -35,13 +39,20 @@ public class NoeudDialog extends Dialog<Noeud> {
            this.py = new TextField(Double.toString(noeud.getPy()));
            this.vx = new TextField(Double.toString(noeud.getF().getVx()));
            this.vy = new TextField(Double.toString(noeud.getF().getVy()));
+           this.noeud = noeud;
        } else {
+           if (t != null) {
            this.px = new TextField(Double.toString(t.getX()));
            this.py = new TextField(Double.toString(t.getY()));
+           } else {
+           this.px = new TextField("0.0");
+           this.py = new TextField("0.0");
+               
+           }
            this.vx = new TextField("0.0");
            this.vy = new TextField("0.0");
+           this.noeud = new NoeudSimple(0, 0, new Vecteur2D(0,0), 0);
        }
-       this.noeud = noeud;
        this.setTitle("Créer un noeud avec les ses caractéristiques");
        Label lPx = new Label("px:");
        Label lPy = new Label("py:");
@@ -56,7 +67,6 @@ public class NoeudDialog extends Dialog<Noeud> {
        grid.add(lFPx, 0, 2);
        grid.add(vx, 1, 2);
        grid.add(vy, 0, 3);
-       grid.add(vy, 1, 3);
 
        ButtonType bOk = new ButtonType("Ok", ButtonData.OK_DONE);
        ButtonType bAnnuler = new ButtonType("Annuler", ButtonData.CANCEL_CLOSE);
@@ -72,10 +82,14 @@ public class NoeudDialog extends Dialog<Noeud> {
                    py = Double.parseDouble(this.py.getText());
                    vx = Double.parseDouble(this.vx.getText());
                    vy = Double.parseDouble(this.vy.getText());
+                   this.noeud.setPx(px);
+                   this.noeud.setPy(py);
+                   this.noeud.getF().setVx(vx);
+                   this.noeud.getF().setVy(vy);
                } catch (NumberFormatException e){
                    return null;
                }
-               return new NoeudSimple(px, py, new Vecteur2D(vx,vy),0);
+               return this.noeud;
            } else {
                return null;
            }
