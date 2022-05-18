@@ -17,6 +17,12 @@ public class Test {
     t=Treillis.treilliTest();
     ArrayList<Barre> barreQuiCasse = new ArrayList();
     barreQuiCasse=t.barreCasse();
+    System.out.println("Matrice des equations : ");
+    PivotGauss.affichageMatrice(t.miseEnEquationMatrice());
+    System.out.println("Vecteur des forces : ");
+    PivotGauss.affichageVecteur(t.miseEnEquationForces());
+    System.out.println("Solution");
+    t.afficherSolution();
     System.out.println("Les barres qui vont casser :");
     for (int i=0;i<barreQuiCasse.size();i++){
         System.out.println(barreQuiCasse.get(i));

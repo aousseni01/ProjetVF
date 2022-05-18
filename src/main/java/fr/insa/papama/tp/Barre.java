@@ -37,7 +37,7 @@ public class Barre {
     //Méthode toString
     @Override
     public String toString() {
-        return ("Barre"+id+" = "+noeudDepart+" ; "+"noeudArrivee. Traction max = "+tractionMax+ "; Compression max = "+compressionMax+"; Coût = "+cout); 
+        return ("Barre"+id+" = "+noeudDepart+" ; "+noeudArrivee+"Traction max = "+tractionMax+ "; Compression max = "+compressionMax+"; Coût = "+cout); 
     }
     
 //  ENCAPSULATION

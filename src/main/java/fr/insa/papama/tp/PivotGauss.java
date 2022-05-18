@@ -4,25 +4,31 @@
  */
 package fr.insa.papama.tp;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 /**
  *
  * @author GWENDOLINE
  */
 public class PivotGauss {
     
-  static void affichageVecteur(double [] t) {
+ public static void affichageVecteur(double [] t) {
     for ( int i = 0 ; i < t.length ; i++ ) {
       System.out.println(t[i]); 
     }
+    System.out.println("");
   }
   
-  static void affichageMatrice(double [][] t) {
+  public static void affichageMatrice(double [][] t) {
+      NumberFormat formatter = new DecimalFormat("#0.00");
       for (double[] t1 : t) {
           for (int j = 0; j < t1.length; j++) {
-              System.out.print(t1[j]+" ");
+              System.out.print(formatter.format(t1[j])+" | ");
           }
           System.out.println("");
       }
+      System.out.println("");
   }
   
 
@@ -116,12 +122,6 @@ public class PivotGauss {
 
   public static double [] resoudreSysteme(double [][] a,double [] b) {
     double [] v; 
-    System.out.println("Matrice Equation:");
-    affichageMatrice(a);
-    System.out.println("");
-    System.out.println("Vecteur Forces:");
-    affichageVecteur(b);
-    System.out.println("");
     v = resolutionGauss(a,b);
     return v;
     }

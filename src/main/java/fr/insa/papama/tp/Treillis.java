@@ -8,6 +8,8 @@ import Jama.Matrix;
 import static java.lang.Math.abs;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import javafx.scene.Group;
 
@@ -55,6 +57,7 @@ public class Treillis {
         return res;
     }
 
+    
     public  int maxIdNoeud() {
         int max = 0;
         if (this.noeuds.size() != 0) {
@@ -67,6 +70,7 @@ public class Treillis {
         return max;
     }
 
+    
     public  int maxIdBarre() {
         int max = 0;
         if (this.barres.size() != 0) {
@@ -79,6 +83,7 @@ public class Treillis {
         return max;
     }
 
+    
     public void ajouteNoeud(Noeud n) {
         if (this.noeuds.size() == 0) {
             n.setId(1);
@@ -97,6 +102,7 @@ public class Treillis {
         }
     }
 
+    
     public  void ajouteBarre(Barre b) {
         int i = 0;
         if (this.barres.size() == 0) {
@@ -114,24 +120,14 @@ public class Treillis {
             }
         }
     }
-
-    public  ArrayList<Barre> barreCasse() {
-        //Création de la matrice des equations
-        int nombreequation;
-        nombreequation = this.barres.size();
+    
+    
+    public ArrayList<String> Inconnues(){
+        int nombreInconnues;
+        nombreInconnues = this.barres.size();
         for (int i = 0; i < this.noeuds.size(); i++) {
-            nombreequation = nombreequation + this.noeuds.get(i).nbrInconnues();
+            nombreInconnues = nombreInconnues + this.noeuds.get(i).nbrInconnues();
         }
-
-        double[][] Equation;
-        Equation = new double[this.noeuds.size() * 2][nombreequation];
-        for (int i = 0; i < this.noeuds.size() * 2; i++) {
-            for (int j = 0; j < nombreequation; j++) {
-                Equation[i][j] = 0;
-            }
-        }
-
-        //Creation d'une liste contenant les inconnues
         ArrayList<String> Inconnues = new ArrayList();
         for (int j = 0; j < this.barres.size(); j++) {
             Inconnues.add("T" + j);
@@ -147,16 +143,22 @@ public class Treillis {
                 }
             }
         }
-
-        //Afficher les inconnues
-        for (int i = 0; i < Inconnues.size(); i++) {
-            System.out.print(Inconnues.get(i)+" ");
+        return Inconnues;
+    }
+    
+    
+    public double[][] miseEnEquationMatrice(){
+        ArrayList<String> Inconnues = this.Inconnues();
+        //Création de la matrice des equations
+        double[][] Equation;
+        Equation = new double[this.noeuds.size() * 2][Inconnues.size()];
+        for (int i = 0; i < this.noeuds.size() * 2; i++) {
+            for (int j = 0; j < Inconnues.size(); j++) {
+                Equation[i][j] = 0;
+            }
         }
-        System.out.println(" ");
-
-        //Creation de la matrice à résoudre A et du vecteur colonne B dans AX=B
+        
         //Remplissage Réactions
-        double[] B=new double[this.noeuds.size() * 2];
         int lig = 0;
         for (int i = 0; i < this.noeuds.size(); i++) {
             Noeud n = this.noeuds.get(i);
@@ -180,7 +182,6 @@ public class Treillis {
                 double angle = b.Angle(n);
                 int col = this.numVar(Inconnues, b);
                 Equation[lig][col] = cos(angle);
-                B[lig] = n.getF().getVx();
             }
             lig++;
             //Equation selon y pour les tensions dans les barres
@@ -189,21 +190,33 @@ public class Treillis {
                 double angle = b.Angle(n);
                 int col = this.numVar(Inconnues, b);
                 Equation[lig][col] = sin(angle);
-                B[lig] = n.getF().getVy();
 
             }
             lig++;
         }
-        System.out.println(" ");
-        
-        
-        //Resolution de la matrice
-        if (this.noeuds.size() * 2 != nombreequation){
+        return Equation;
+    }
+    public double[] miseEnEquationForces(){
+        double[] B=new double[this.noeuds.size()*2];
+        int lig=0;
+        for (int i = 0; i < this.noeuds.size(); i++) {
+            B[lig] = this.noeuds.get(i).getF().getVx();
+            lig++;
+            B[lig] = this.noeuds.get(i).getF().getVy();
+            lig++;
+        }
+        return B;
+    }
+    public double[] resoudreSys(){
+        ArrayList<String> Inconnues = this.Inconnues();
+        double[] B= this.miseEnEquationForces();
+        double[][] Equation = this.miseEnEquationMatrice();
+        if (this.noeuds.size() * 2 != Inconnues.size()){
               throw new Error("Le système n'est pas soluble (la matrice n'est pas carrée)");
         }
-        Matrix m=new Matrix(this.noeuds.size() * 2 , nombreequation);
+        Matrix m=new Matrix(this.noeuds.size() * 2 , Inconnues.size());
         for (int i = 0; i < this.noeuds.size() * 2; i++) {
-            for (int j = 0; j < nombreequation; j++) {
+            for (int j = 0; j < Inconnues.size(); j++) {
                 m.set(i, j, Equation[i][j]);
             }
         }
@@ -211,11 +224,11 @@ public class Treillis {
              throw new Error("Le système n'est pas soluble (le determinant est nul");
         }
         double[] v=PivotGauss.resoudreSysteme(Equation, B);
-        
-        for (int in = 0; in < v.length; in++) {
-            System.out.println(Inconnues.get(in)+" "+v[in]);
-        }
-        //Trouver les barres qui risquent de casser
+        return v;
+    }
+//Trouver les barres qui risquent de casser    
+    public  ArrayList<Barre> barreCasse() {
+        double[] v = this.resoudreSys();
         ArrayList<Barre> fragile = new ArrayList();
         for (int k = 0; k < this.barres.size(); k++) {
             if(v[k]>=0){
@@ -229,6 +242,15 @@ public class Treillis {
             }
         }
         return fragile;
+    }
+    public void afficherSolution(){
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        double[] v = this.resoudreSys();
+        ArrayList<String> Inconnues = this.Inconnues();
+        for (int i=0;i<Inconnues.size();i++){
+            System.out.println(Inconnues.get(i)+" : "+formatter.format(v[i]));
+        }
+        System.out.println("");
     }
 
     public int numVar(ArrayList<String> inconnues, Barre b) {
