@@ -5,7 +5,10 @@
  */
 package fr.insa.papama.td.interfacegraph;
 
+import fr.insa.papama.tp.Noeud;
 import fr.insa.papama.tp.Treillis;
+import java.util.Optional;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -19,6 +22,8 @@ public class MainPanel extends BorderPane{
     private Treillis model;
     private Controleur control;
     
+    private Button creationNoeud;
+    
     public MainPanel(Treillis model) {
         this.control = new Controleur(this);
         this.model = model;
@@ -28,6 +33,17 @@ public class MainPanel extends BorderPane{
         this.setCenter(this.dessin);
         this.setTop(this.outilsTop);
         this.setLeft(this.outilsLeft);
+        this.creationNoeud = new Button("creation noeud");
+        this.creationNoeud.setOnAction((t) -> {
+            NoeudDialog dialog = new NoeudDialog();
+            Optional<Noeud> res = dialog.showAndWait();
+            if (res.isPresent()) {
+                Noeud n = res.get();
+                this.model.ajouteNoeud(n);
+                this.dessin.redrawAll();
+            }
+        });
+        this.setBottom(this.creationNoeud);
     }
     public Treillis getModel(){
         return model;

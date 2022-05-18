@@ -11,7 +11,7 @@ package fr.insa.papama.tp;
  */
 public class Vecteur2D {
     
-    // Atributs 
+    // Attributs 
     private double vx; 
     private double vy; 
     
