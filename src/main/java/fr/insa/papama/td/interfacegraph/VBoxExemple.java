@@ -20,9 +20,12 @@ public class VBoxExemple extends VBox {
     
     private Button force; 
     private Button barre; 
+    private Button noeudCoord;
     private Menu noeud;
     private MenuItem noeudSimple, noeudAppuiSimple, noeudAppuiDouble; 
     private MenuBar bar; 
+    private MainPanel main; 
+    private Controleur controleur; 
     
   
   
@@ -35,18 +38,23 @@ public class VBoxExemple extends VBox {
 //        listedeboutonsH.add(jb6);
 //        this.getChildren().addAll(jb5,jb6);
 
-        this.force = new Button("Créer un point"); 
+        this.force = new Button("Ajouter une force"); 
         this.barre = new Button("Créer un segment"); 
         this.getChildren().addAll(this.force, this.barre); 
         
 //        this.setSpacing(5);
         FxUtils.setSimpleBorder(this, Color.BLUEVIOLET,1); 
 
-        
+        this.noeudCoord = new Button("Créer un noeud par coordonées"); 
+                this.noeudCoord.setOnAction((t) -> {
+            this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
+        });
         this.noeud = new Menu("Créer un noeud"); 
         this.noeudAppuiDouble = new MenuItem("Noeud Appui Double"); 
         this.noeudAppuiSimple = new MenuItem("Noeud Appui Simple"); 
         this.noeudSimple = new MenuItem("Noeud Simple"); 
+        
+        
            
         noeud.getItems().addAll(noeudSimple, noeudAppuiSimple, noeudAppuiDouble); 
         this.bar = new MenuBar (this.noeud); 
