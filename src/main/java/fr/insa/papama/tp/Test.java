@@ -17,6 +17,7 @@ public class Test {
     t=Treillis.treilliTest();
     ArrayList<Barre> barreQuiCasse = new ArrayList();
     barreQuiCasse=t.barreCasse();
+    System.out.println("Les barres qui vont casser :");
     for (int i=0;i<barreQuiCasse.size();i++){
         System.out.println(barreQuiCasse.get(i));
     }

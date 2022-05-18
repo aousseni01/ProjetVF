@@ -211,7 +211,10 @@ public class Treillis {
              throw new Error("Le système n'est pas soluble (le determinant est nul");
         }
         double[] v=PivotGauss.resoudreSysteme(Equation, B);
-
+        
+        for (int in = 0; in < v.length; in++) {
+            System.out.println(Inconnues.get(in)+" "+v[in]);
+        }
         //Trouver les barres qui risquent de casser
         ArrayList<Barre> fragile = new ArrayList();
         for (int k = 0; k < this.barres.size(); k++) {

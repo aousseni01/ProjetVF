@@ -116,13 +116,13 @@ public class PivotGauss {
 
   public static double [] resoudreSysteme(double [][] a,double [] b) {
     double [] v; 
-    System.out.println("Matrice A:");
+    System.out.println("Matrice Equation:");
     affichageMatrice(a);
-    System.out.println("Vecteur B:");
+    System.out.println("");
+    System.out.println("Vecteur Forces:");
     affichageVecteur(b);
+    System.out.println("");
     v = resolutionGauss(a,b);
-    System.out.println("Vecteur V solution ");
-    affichageVecteur(v);
     return v;
     }
 }
