@@ -5,8 +5,10 @@
  */
 package fr.insa.papama.td.interfacegraph;
 
+import fr.insa.papama.tp.Barre;
 import fr.insa.papama.tp.Noeud;
 import fr.insa.papama.tp.Treillis;
+import java.util.List;
 import java.util.Optional;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -21,7 +23,7 @@ public class MainPanel extends BorderPane{
     private DessinPane dessin;
     private Treillis model;
     private Controleur control;
-    
+    private List<Barre> barreProbleme;
     private Button creationNoeud;
     
     public MainPanel(Treillis model) {
