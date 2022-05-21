@@ -5,6 +5,11 @@
 package fr.insa.papama.tp;
 
 import Jama.Matrix;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import static java.lang.Math.abs;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -12,6 +17,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -57,8 +63,7 @@ public class Treillis {
         return res;
     }
 
-    
-    public  int maxIdNoeud() {
+    public int maxIdNoeud() {
         int max = 0;
         if (this.noeuds.size() != 0) {
             for (int i = 0; i < this.noeuds.size(); i++) {
@@ -70,8 +75,7 @@ public class Treillis {
         return max;
     }
 
-    
-    public  int maxIdBarre() {
+    public int maxIdBarre() {
         int max = 0;
         if (this.barres.size() != 0) {
             for (int i = 0; i < this.barres.size(); i++) {
@@ -83,7 +87,6 @@ public class Treillis {
         return max;
     }
 
-    
     public void ajouteNoeud(Noeud n) {
         if (this.noeuds.size() == 0) {
             n.setId(1);
@@ -102,8 +105,7 @@ public class Treillis {
         }
     }
 
-    
-    public  void ajouteBarre(Barre b) {
+    public void ajouteBarre(Barre b) {
         int i = 0;
         if (this.barres.size() == 0) {
             b.setId(0);
@@ -120,9 +122,8 @@ public class Treillis {
             }
         }
     }
-    
-    
-    public ArrayList<String> Inconnues(){
+
+    public ArrayList<String> Inconnues() {
         int nombreInconnues;
         nombreInconnues = this.barres.size();
         for (int i = 0; i < this.noeuds.size(); i++) {
@@ -145,9 +146,8 @@ public class Treillis {
         }
         return Inconnues;
     }
-    
-    
-    public double[][] miseEnEquationMatrice(){
+
+    public double[][] miseEnEquationMatrice() {
         ArrayList<String> Inconnues = this.Inconnues();
         //Création de la matrice des equations
         double[][] Equation;
@@ -157,7 +157,7 @@ public class Treillis {
                 Equation[i][j] = 0;
             }
         }
-        
+
         //Remplissage Réactions
         int lig = 0;
         for (int i = 0; i < this.noeuds.size(); i++) {
@@ -171,7 +171,7 @@ public class Treillis {
                 } else {
                     int num = this.numVar(Inconnues, n);
                     NoeudAppuiSimple ns = (NoeudAppuiSimple) n;
-                    double angle=ns.getNormale();
+                    double angle = ns.getNormale();
                     Equation[lig][num] = cos(angle);
                     Equation[lig + 1][num] = sin(angle);
                 }
@@ -196,9 +196,10 @@ public class Treillis {
         }
         return Equation;
     }
-    public double[] miseEnEquationForces(){
-        double[] B=new double[this.noeuds.size()*2];
-        int lig=0;
+
+    public double[] miseEnEquationForces() {
+        double[] B = new double[this.noeuds.size() * 2];
+        int lig = 0;
         for (int i = 0; i < this.noeuds.size(); i++) {
             B[lig] = this.noeuds.get(i).getF().getVx();
             lig++;
@@ -207,35 +208,37 @@ public class Treillis {
         }
         return B;
     }
-    public double[] resoudreSys(){
+
+    public double[] resoudreSys() {
         ArrayList<String> Inconnues = this.Inconnues();
-        double[] B= this.miseEnEquationForces();
+        double[] B = this.miseEnEquationForces();
         double[][] Equation = this.miseEnEquationMatrice();
-        if (this.noeuds.size() * 2 != Inconnues.size()){
-              throw new Error("Le système n'est pas soluble (la matrice n'est pas carrée)");
+        if (this.noeuds.size() * 2 != Inconnues.size()) {
+            throw new Error("Le système n'est pas soluble (la matrice n'est pas carrée)");
         }
-        Matrix m=new Matrix(this.noeuds.size() * 2 , Inconnues.size());
+        Matrix m = new Matrix(this.noeuds.size() * 2, Inconnues.size());
         for (int i = 0; i < this.noeuds.size() * 2; i++) {
             for (int j = 0; j < Inconnues.size(); j++) {
                 m.set(i, j, Equation[i][j]);
             }
         }
-        if(m.det()==0){
-             throw new Error("Le système n'est pas soluble (le determinant est nul");
+        if (m.det() == 0) {
+            throw new Error("Le système n'est pas soluble (le determinant est nul");
         }
-        double[] v=PivotGauss.resoudreSysteme(Equation, B);
+        double[] v = PivotGauss.resoudreSysteme(Equation, B);
         return v;
     }
 //Trouver les barres qui risquent de casser    
-    public  ArrayList<Barre> barreCasse() {
+
+    public ArrayList<Barre> barreCasse() {
         double[] v = this.resoudreSys();
         ArrayList<Barre> fragile = new ArrayList();
         for (int k = 0; k < this.barres.size(); k++) {
-            if(v[k]>=0){
+            if (v[k] >= 0) {
                 if (v[k] > this.barres.get(k).getCompressionMax()) {
                     fragile.add(this.barres.get(k));
                 }
-            }else{
+            } else {
                 if (abs(v[k]) > this.barres.get(k).getTractionMax()) {
                     fragile.add(this.barres.get(k));
                 }
@@ -243,12 +246,13 @@ public class Treillis {
         }
         return fragile;
     }
-    public void afficherSolution(){
+
+    public void afficherSolution() {
         NumberFormat formatter = new DecimalFormat("#0.00");
         double[] v = this.resoudreSys();
         ArrayList<String> Inconnues = this.Inconnues();
-        for (int i=0;i<Inconnues.size();i++){
-            System.out.println(Inconnues.get(i)+" : "+formatter.format(v[i]));
+        for (int i = 0; i < Inconnues.size(); i++) {
+            System.out.println(Inconnues.get(i) + " : " + formatter.format(v[i]));
         }
         System.out.println("");
     }
@@ -278,36 +282,37 @@ public class Treillis {
             return i;
         }
     }
+
     public Noeud noeudPlusProche(double x, double y, double distMax) {
-        if (this.noeuds.isEmpty())
+        if (this.noeuds.isEmpty()) {
             return null;
-        else {
+        } else {
             Noeud nmin = this.noeuds.get(0);
             double distmin = nmin.distance(x, y);
-            for (int i=1; i < this.noeuds.size(); i++){
+            for (int i = 1; i < this.noeuds.size(); i++) {
                 Noeud n = this.noeuds.get(i);
                 double dist = n.distance(x, y);
-                if (dist < distmin){
+                if (dist < distmin) {
                     distmin = dist;
                     nmin = n;
                 }
             }
-            if (distmin <= distMax){
+            if (distmin <= distMax) {
                 return nmin;
             } else {
                 return null;
             }
         }
     }
+
     public Group dessine() {
         Group g = new Group();
-        for (int i=0; i < this.noeuds.size(); i++) {
+        for (int i = 0; i < this.noeuds.size(); i++) {
             g.getChildren().add(this.noeuds.get(i).dessine());
         }
-        for (int i=0; i < this.barres.size(); i++) {
+        for (int i = 0; i < this.barres.size(); i++) {
             g.getChildren().add(this.barres.get(i).dessine());
         }
         return g;
     }
-}
-
+   }
