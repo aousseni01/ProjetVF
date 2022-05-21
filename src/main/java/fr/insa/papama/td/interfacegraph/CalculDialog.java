@@ -15,9 +15,11 @@ import javafx.scene.input.MouseEvent;
  * @author anyao
  */
 public class CalculDialog extends Dialog<PivotGauss>{
-    private TextField resolution;
-    
-    public CalculDialog(MouseEvent t){   
-        this.setTitle("Résolution de la matrice :" + " " + PivotGauss.resoudreSysteme(a, b));
-    }
+//    private TextField resolution;
+//    
+//    public CalculDialog(MouseEvent t){   
+//        this.setTitle("Résolution de la matrice :");
+//        System.out.println(PivotGauss.affichageMatrice(double [][] t));
+//        
+//    }
 }
