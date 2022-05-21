@@ -292,7 +292,6 @@ public class Treillis {
             x2 = this.barres.get(i).getNoeudArrivee().getPx(); 
             y2 = this.barres.get(i).getNoeudArrivee().getPy();
             longueur = java.lang.Math.sqrt((y2-y1)*(y2-y1)+(x2-x1)*(x2-x1));
-            System.out.println("longeur "+longueur+" cout "+((longueur/50)*this.barres.get(i).getCout()));
             cout=cout+(longueur/50)*this.barres.get(i).getCout();
         }
         return cout; 
