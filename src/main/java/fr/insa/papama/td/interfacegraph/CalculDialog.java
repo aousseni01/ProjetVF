@@ -14,14 +14,14 @@ import javafx.scene.input.MouseEvent;
  *
  * @author anyao
  */
-public class CalculDialog extends Dialog<PivotGauss>{
-    private TextField resolution;
-    
-    public CalculDialog(PivotGauss calcul, MouseEvent t){   
-//        this.setTitle("Résolution de la matrice");
-//        System.out.println(PivotGauss.affichageMatrice(double [][] t));
-//        afficherSolutions
-//                affichageVecteur
-//                affichageMatrice
-//    }
-}
+//public class CalculDialog extends Dialog<PivotGauss>{
+//    private TextField resolution;
+//    
+//    public CalculDialog(PivotGauss calcul, MouseEvent t){   
+////        this.setTitle("Résolution de la matrice");
+////        System.out.println(PivotGauss.affichageMatrice(double [][] t));
+////        afficherSolutions
+////                affichageVecteur
+////                affichageMatrice
+////    }
+//}
