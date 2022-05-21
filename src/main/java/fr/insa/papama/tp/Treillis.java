@@ -325,7 +325,7 @@ public class Treillis {
             g.getChildren().add(this.noeuds.get(i).dessine());
         }
         for (int i = 0; i < this.barres.size(); i++) {
-            g.getChildren().add(this.barres.get(i).dessine());
+            g.getChildren().add(this.barres.get(i).dessine(this.barreCasse()));
         }
         return g;
     }
