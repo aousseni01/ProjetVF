@@ -52,7 +52,6 @@ public class HBoxExemple extends HBox {
         }); 
 //        this.setSpacing(5);
         this.getChildren().addAll(this.enregistrer, this.supprimer); 
-        
         FxUtils.setSimpleBorder(this, Color.BLUEVIOLET,1); 
 
     }

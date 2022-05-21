@@ -47,19 +47,21 @@ public class MainPanel extends BorderPane{
             }
         });
         this.setBottom(this.creationNoeud);
-        this.calculTout = new Button("calcul");
+        this.calculTout = new Button("calcul tout");
         this.calculTout.setOnAction((t) -> {
-           //TODO
+           CalculDialog dialog1 = new CalculDialog(this.model);
+           dialog1.showAndWait();
 //       this.barreProbleme = this.model.creaMatrice();
-           CalculDialog dialog = new CalculDialog();
-           this.barreProbleme.add(this.model.getBarres().get(0));
-           System.out.println(this.barreProbleme);
+           
+//           this.barreProbleme.addAll(this.model.barreCasse());
+//           System.out.println(this.barreProbleme);
            this.dessin.redrawAll();
        });
        this.setRight(this.calculTout);
     }
+    
     public Treillis getModel(){
-        return model;
+        return this.model;
     }
 
     /**

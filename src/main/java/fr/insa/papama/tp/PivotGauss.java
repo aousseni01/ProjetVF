@@ -20,6 +20,8 @@ public class PivotGauss {
     System.out.println("");
   }
   
+
+ 
   public static void affichageMatrice(double [][] t) {
       NumberFormat formatter = new DecimalFormat("#0.00");
       for (double[] t1 : t) {

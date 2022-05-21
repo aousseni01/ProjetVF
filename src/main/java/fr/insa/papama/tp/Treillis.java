@@ -256,6 +256,33 @@ public class Treillis {
         }
         System.out.println("");
     }
+    public String solutionToString() {
+        String s=new String();
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        double[] v = this.resoudreSys();
+        ArrayList<String> Inconnues = this.Inconnues();
+        String Newligne=System.getProperty("line.separator");
+        for (int i = 0; i < Inconnues.size(); i++) {
+            s=s+Inconnues.get(i) + " : " + formatter.format(v[i])+Newligne+" ";
+        }
+        return s;
+    }
+    public String matriceToString(){
+        String s =new String();
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        double[] v = this.miseEnEquationForces();
+        double[][]m=this.miseEnEquationMatrice();
+        ArrayList<String> Inconnues = this.Inconnues();
+        String Newligne=System.getProperty("line.separator");
+        
+        for (int i = 0; i < this.noeuds.size()*2; i++) {
+            for(int j=0;j<this.Inconnues().size();j++){
+                s=s+formatter.format(m[i][j])+"   " ;           
+            }
+            s=s+formatter.format(v[i])+Newligne;    
+        }
+        return s;
+    }
 
     public int numVar(ArrayList<String> inconnues, Barre b) {
         int pos = this.barres.indexOf(b);
