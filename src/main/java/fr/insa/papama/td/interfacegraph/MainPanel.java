@@ -25,6 +25,7 @@ public class MainPanel extends BorderPane{
     private Controleur control;
     private List<Barre> barreProbleme;
     private Button creationNoeud;
+    private Button calculTout;
     
     public MainPanel(Treillis model) {
         this.control = new Controleur(this);
@@ -46,6 +47,16 @@ public class MainPanel extends BorderPane{
             }
         });
         this.setBottom(this.creationNoeud);
+        this.calculTout = new Button("calcul");
+        this.calculTout.setOnAction((t) -> {
+           //TODO
+//       this.barreProbleme = this.model.creaMatrice();
+           CalculDialog dialog = new CalculDialog();
+           this.barreProbleme.add(this.model.getBarres().get(0));
+           System.out.println(this.barreProbleme);
+           this.dessin.redrawAll();
+       });
+       this.setRight(this.calculTout);
     }
     public Treillis getModel(){
         return model;
