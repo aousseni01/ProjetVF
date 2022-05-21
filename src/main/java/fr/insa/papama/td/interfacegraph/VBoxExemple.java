@@ -39,7 +39,11 @@ public class VBoxExemple extends VBox {
     public VBoxExemple() {
 
         this.force = new Button("Ajouter une force"); 
-        this.barre = new Button("Créer un segment"); 
+        this.barre = new Button("Créer une barre");
+        this.barre.setOnAction((t) -> {
+            this.main.getControleur().ChangerEtat(Controleur.Etat.BARRE1);
+        });
+        
         this.getChildren().addAll(this.force, this.barre); 
         
 
