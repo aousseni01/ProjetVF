@@ -27,8 +27,8 @@ public class Test {
     for (int i=0;i<barreQuiCasse.size();i++){
         System.out.println(barreQuiCasse.get(i));
     }
-    
-        
+    double cout= t.coutTreillis();
+    System.out.println("cout total "+cout);
     }
     
     

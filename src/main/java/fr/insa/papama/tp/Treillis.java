@@ -51,9 +51,9 @@ public class Treillis {
         NoeudAppuiDouble n0 = new NoeudAppuiDouble(0, 200, new Vecteur2D(0, 0), 0);
         NoeudSimple n2 = new NoeudSimple(100, 100, new Vecteur2D(0, -1000), 2);
         NoeudAppuiSimple n1 = new NoeudAppuiSimple(0, 0, new Vecteur2D(0, 0), 1, 0);
-        Barre b0 = new Barre(0, n0, n2, 0, 0, 0);
-        Barre b1 = new Barre(1, n2, n1, 0, 0, 0);
-        Barre b2 = new Barre(2, n0, n1, 0, 0, 0);
+        Barre b0 = new Barre(0, n0, n2, 0, 0, 20);
+        Barre b1 = new Barre(1, n2, n1, 0, 0, 20);
+        Barre b2 = new Barre(2, n0, n1, 0, 0, 20);
         res.ajouteBarre(b0);
         res.ajouteBarre(b1);
         res.ajouteBarre(b2);
@@ -283,6 +283,21 @@ public class Treillis {
         }
     }
 
+    public double coutTreillis(){
+        double cout=0;
+        double y1, y2, x1, x2,longueur;
+        for (int i=0;i<this.getBarres().size();i++){
+            x1 = this.barres.get(i).getNoeudDepart().getPx(); 
+            y1 = this.barres.get(i).getNoeudDepart().getPy(); 
+            x2 = this.barres.get(i).getNoeudArrivee().getPx(); 
+            y2 = this.barres.get(i).getNoeudArrivee().getPy();
+            longueur = java.lang.Math.sqrt((y2-y1)*(y2-y1)+(x2-x1)*(x2-x1));
+            System.out.println("longeur "+longueur+" cout "+((longueur/50)*this.barres.get(i).getCout()));
+            cout=cout+(longueur/50)*this.barres.get(i).getCout();
+        }
+        return cout; 
+    }
+        
     public Noeud noeudPlusProche(double x, double y, double distMax) {
         if (this.noeuds.isEmpty()) {
             return null;
