@@ -37,35 +37,32 @@ public class VBoxExemple extends VBox {
   
     
     public VBoxExemple() {
-//        List<Button> listedeboutonsH = new ArrayList<>();
-//        Button jb5 = new Button ("Créer");
-//        listedeboutonsH.add(jb5);
-//        Button jb6 = new Button ("Supprimer");
-//        listedeboutonsH.add(jb6);
-//        this.getChildren().addAll(jb5,jb6);
 
         this.force = new Button("Ajouter une force"); 
         this.barre = new Button("Créer un segment"); 
         this.getChildren().addAll(this.force, this.barre); 
         
-//        this.setSpacing(5);
+
+        
         FxUtils.setSimpleBorder(this, Color.BLUEVIOLET,1); 
 
-//        this.noeudCoord = new Button("Créer un noeud par coordonées"); 
-//                this.noeudCoord.setOnAction((t) -> {
-//            this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
-//        });
+
         this.noeud = new Menu("Créer un noeud"); 
         this.noeudAppuiDouble = new MenuItem("Noeud Appui Double"); 
         this.noeudAppuiDouble.setOnAction((t) -> {
-
+            System.out.println("Noeud Simple");
+            this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
         });
         this.noeudAppuiSimple = new MenuItem("Noeud Appui Simple"); 
         this.noeudAppuiSimple.setOnAction((t) -> {
-           
+            System.out.println("Noeud Simple");
+            this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
+
         });
         this.noeudSimple = new MenuItem("Noeud Simple"); 
         this.noeudSimple.setOnAction((t) -> {
+            System.out.println("Noeud Simple");
+            this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
 
         });
         
