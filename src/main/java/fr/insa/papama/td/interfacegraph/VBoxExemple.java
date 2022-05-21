@@ -50,12 +50,12 @@ public class VBoxExemple extends VBox {
         this.noeud = new Menu("Créer un noeud"); 
         this.noeudAppuiDouble = new MenuItem("Noeud Appui Double"); 
         this.noeudAppuiDouble.setOnAction((t) -> {
-            System.out.println("Noeud Simple");
+            System.out.println("Noeud Appui Double");
             this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
         });
         this.noeudAppuiSimple = new MenuItem("Noeud Appui Simple"); 
         this.noeudAppuiSimple.setOnAction((t) -> {
-            System.out.println("Noeud Simple");
+            System.out.println("Noeud Appuis Simple");
             this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
 
         });
@@ -65,9 +65,7 @@ public class VBoxExemple extends VBox {
             this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
 
         });
-        
-        
-           
+                   
         noeud.getItems().addAll(noeudSimple, noeudAppuiSimple, noeudAppuiDouble); 
         this.bar = new MenuBar (this.noeud); 
         this.getChildren().add(bar); 
@@ -102,5 +100,12 @@ public class VBoxExemple extends VBox {
         return barre;
     }
     
+    public MainPanel getMain() {
+        return main; 
+    }
+    
+    public void setMain(MainPanel main) {
+        this.main = main; 
+    }
 }
 
