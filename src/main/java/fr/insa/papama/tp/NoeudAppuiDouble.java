@@ -6,6 +6,8 @@ package fr.insa.papama.tp;
 
 import javafx.scene.Group;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
+
 
 /**
  *
@@ -28,7 +30,7 @@ public class NoeudAppuiDouble extends NoeudAppui {
     
     @Override
     public Group dessine() {
-        Ellipse rep = new Ellipse(this.getPx(), this.getPy(), 5, 8);
+        Rectangle rep = new Rectangle(this.getPx(), this.getPy(), 6, 3);
          Group l = new Group(rep);
          return l;
        }

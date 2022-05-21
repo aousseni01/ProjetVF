@@ -5,6 +5,9 @@
  */
 package fr.insa.papama.td.interfacegraph;
 
+import fr.insa.papama.tp.Noeud;
+import fr.insa.papama.tp.NoeudAppuiDouble;
+import fr.insa.papama.tp.Treillis;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -26,6 +29,9 @@ public class VBoxExemple extends VBox {
     private MenuBar bar; 
     private MainPanel main; 
     private Controleur controleur; 
+    private DessinPane dessin; 
+    private Treillis model;
+
     
   
   
@@ -45,14 +51,23 @@ public class VBoxExemple extends VBox {
 //        this.setSpacing(5);
         FxUtils.setSimpleBorder(this, Color.BLUEVIOLET,1); 
 
-        this.noeudCoord = new Button("Créer un noeud par coordonées"); 
-                this.noeudCoord.setOnAction((t) -> {
-            this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
-        });
+//        this.noeudCoord = new Button("Créer un noeud par coordonées"); 
+//                this.noeudCoord.setOnAction((t) -> {
+//            this.main.getControleur().ChangerEtat(Controleur.Etat.NOEUD);
+//        });
         this.noeud = new Menu("Créer un noeud"); 
         this.noeudAppuiDouble = new MenuItem("Noeud Appui Double"); 
+        this.noeudAppuiDouble.setOnAction((t) -> {
+
+        });
         this.noeudAppuiSimple = new MenuItem("Noeud Appui Simple"); 
+        this.noeudAppuiSimple.setOnAction((t) -> {
+           
+        });
         this.noeudSimple = new MenuItem("Noeud Simple"); 
+        this.noeudSimple.setOnAction((t) -> {
+
+        });
         
         
            

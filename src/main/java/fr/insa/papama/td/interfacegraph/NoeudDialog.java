@@ -53,7 +53,7 @@ public class NoeudDialog extends Dialog<Noeud> {
            this.vy = new TextField("0.0");
            this.noeud = new NoeudSimple(0, 0, new Vecteur2D(0,0), 0);
        }
-       this.setTitle("Créer un noeud avec les ses caractéristiques");
+       this.setTitle("Création du noeud simple");
        Label lPx = new Label("px:");
        Label lPy = new Label("py:");
        Label lFPx = new Label("Composante de la force appliquée vx:");
@@ -66,7 +66,8 @@ public class NoeudDialog extends Dialog<Noeud> {
        grid.add(py, 1, 1);
        grid.add(lFPx, 0, 2);
        grid.add(vx, 1, 2);
-       grid.add(vy, 0, 3);
+       grid.add(lFPy,0,3); 
+       grid.add(vy, 1, 3);
 
        ButtonType bOk = new ButtonType("Ok", ButtonData.OK_DONE);
        ButtonType bAnnuler = new ButtonType("Annuler", ButtonData.CANCEL_CLOSE);
