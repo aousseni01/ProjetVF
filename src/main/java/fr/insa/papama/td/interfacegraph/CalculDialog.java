@@ -29,7 +29,7 @@ public class CalculDialog extends Dialog{
  //       GridPane grid = new GridPane();
         String Newligne=System.getProperty("line.separator");
         ButtonType bOk = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        this.setContentText("Matrice :"+Newligne+treilli.matriceToString()+Newligne+treilli.solutionToString());
+        this.setContentText(treilli.calculToString());
 //        this.getDialogPane().setContent(syst);
         this.getDialogPane().getButtonTypes().add(bOk);
     }

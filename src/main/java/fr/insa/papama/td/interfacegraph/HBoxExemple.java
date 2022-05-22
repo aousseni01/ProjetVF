@@ -33,7 +33,7 @@ public class HBoxExemple extends HBox {
   
   
     
-    public HBoxExemple() {
+    public HBoxExemple(Treillis treilli) {
 //        List<Button> listedeboutonsH = new ArrayList<>();
 //        Button jb5 = new Button ("Créer");
 //        listedeboutonsH.add(jb5);
@@ -44,7 +44,7 @@ public class HBoxExemple extends HBox {
         this.enregistrer = new Button("Enregistrer"); 
         this.enregistrer.setOnAction((t) -> {
             System.out.println("Clic sur le Bouton Enregistrer");
-            saveAs(); 
+            saveAs(treilli); 
         });
         this.supprimer = new Button("Supprimer"); 
         this.supprimer.setOnAction((t) -> {
@@ -56,32 +56,32 @@ public class HBoxExemple extends HBox {
 
     }
     
-     public void saveAs() {
+     public void saveAs(Treillis t) {
        FileChooser chooser = new FileChooser();
        File f = chooser.showSaveDialog(this.stage);
        if (f != null) {
-           save(f);
+           save(f,t);
        }
    }
 
-   private void save(File f) {
+   private void save(File f,Treillis t) {
        try (BufferedWriter bout = new BufferedWriter(new FileWriter(f))) {
-           bout.write("Noeuds : ");
-           bout.newLine();
-           bout.write("NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0)");
-           bout.newLine();
-           bout.write("NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0");
-           bout.newLine();
-           bout.write("NoeudSimple3 = (100.0;100.0), (0.0;-1000.0)");
-           bout.newLine();
-           bout.write("Barres : ");
-           bout.newLine();
-           bout.write("Barre0 = NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0) ; NoeudSimple3 = (100.0;100.0), (0.0;-1000.0)Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
-           bout.newLine();
-           bout.write("Barre1 = NoeudSimple3 = (100.0;100.0), (0.0;-1000.0) ; NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
-           bout.newLine();
-           bout.write("Barre2 = NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0) ; NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
-           bout.newLine();
+           bout.write(t.treilliToString());
+//           bout.newLine();
+//           bout.write("NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0)");
+//           bout.newLine();
+//           bout.write("NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0");
+//           bout.newLine();
+//           bout.write("NoeudSimple3 = (100.0;100.0), (0.0;-1000.0)");
+//           bout.newLine();
+//           bout.write("Barres : ");
+//           bout.newLine();
+//           bout.write("Barre0 = NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0) ; NoeudSimple3 = (100.0;100.0), (0.0;-1000.0)Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
+//           bout.newLine();
+//           bout.write("Barre1 = NoeudSimple3 = (100.0;100.0), (0.0;-1000.0) ; NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
+//           bout.newLine();
+//           bout.write("Barre2 = NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0) ; NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
+//           bout.newLine();
            this.fichierCourant = f;
        } catch (IOException ex) {
            Alert alert = new Alert(Alert.AlertType.ERROR);

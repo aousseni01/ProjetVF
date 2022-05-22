@@ -30,7 +30,7 @@ public class MainPanel extends BorderPane{
     public MainPanel(Treillis model) {
         this.control = new Controleur(this);
         this.model = model;
-        this.outilsTop = new HBoxExemple();
+        this.outilsTop = new HBoxExemple(this.model);
         this.outilsLeft = new VBoxExemple(); 
         this.dessin = new DessinPane(this);
         this.setCenter(this.dessin);
