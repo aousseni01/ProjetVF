@@ -47,7 +47,7 @@ public class MainPanel extends BorderPane{
             }
         });
         this.setBottom(this.creationNoeud);
-        this.calculTout = new Button("calcul tout");
+        this.calculTout = new Button("calculer");
         this.calculTout.setOnAction((t) -> {
            CalculDialog dialog1 = new CalculDialog(this.model);
            dialog1.showAndWait();
