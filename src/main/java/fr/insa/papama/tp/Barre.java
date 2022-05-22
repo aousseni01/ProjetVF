@@ -5,7 +5,6 @@
 package fr.insa.papama.tp;
 
 import static java.lang.Math.atan;
-import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -160,14 +159,22 @@ public class Barre {
     }
     
    
-    public Group dessine(List<Barre> problemes){
+    public Group dessine(){
         Line res = new Line(this.getNoeudDepart().getPx(), this.getNoeudDepart().getPy(), this.getNoeudArrivee().getPx(), this.getNoeudArrivee().getPy());
-         if (problemes.contains(this)) {
-            res.setStroke(Color.RED);
-        } else  {
-            res.setStroke(Color.GREEN);
-        }
+        res.setStroke(Color.GREEN);
         Group g = new Group(res);
         return g;
     }
+    
+    //Méthode envisagée pour changer la couleur des barres qui risquent de casser
+//    public Group dessine(ArrayList<Barre> problemes){
+//        Line res = new Line(this.getNoeudDepart().getPx(), this.getNoeudDepart().getPy(), this.getNoeudArrivee().getPx(), this.getNoeudArrivee().getPy());
+//        if (problemes.contains(this)) {
+//            res.setStroke(Color.RED);
+//        } else  {
+//           res.setStroke(Color.GREEN);
+//        }
+//        Group g=new Group(res);
+//        return g;
+//    }
 }

@@ -51,10 +51,6 @@ public class MainPanel extends BorderPane{
         this.calculTout.setOnAction((t) -> {
            CalculDialog dialog1 = new CalculDialog(this.model);
            dialog1.showAndWait();
-//       this.barreProbleme = this.model.creaMatrice();
-           
-//           this.barreProbleme.addAll(this.model.barreCasse());
-//           System.out.println(this.barreProbleme);
            this.dessin.redrawAll();
        });
        this.setRight(this.calculTout);

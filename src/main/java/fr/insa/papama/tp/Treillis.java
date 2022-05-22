@@ -5,11 +5,6 @@
 package fr.insa.papama.tp;
 
 import Jama.Matrix;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import static java.lang.Math.abs;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -17,7 +12,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import javafx.scene.Group;
-import javafx.scene.control.Alert;
 
 /**
  *
@@ -123,6 +117,7 @@ public class Treillis {
         }
     }
 
+//Methode qui renvoie la liste des Inconnues
     public ArrayList<String> Inconnues() {
         int nombreInconnues;
         nombreInconnues = this.barres.size();
@@ -197,6 +192,7 @@ public class Treillis {
         return Equation;
     }
 
+//Equivalent qu vecteur B dans AX=B
     public double[] miseEnEquationForces() {
         double[] B = new double[this.noeuds.size() * 2];
         int lig = 0;
@@ -228,8 +224,8 @@ public class Treillis {
         double[] v = PivotGauss.resoudreSysteme(Equation, B);
         return v;
     }
+    
 //Trouver les barres qui risquent de casser    
-
     public ArrayList<Barre> barreCasse() {
         double[] v = this.resoudreSys();
         ArrayList<Barre> fragile = new ArrayList();
@@ -246,7 +242,8 @@ public class Treillis {
         }
         return fragile;
     }
-
+    
+//Permet d'afficher la solution dans la console
     public void afficherSolution() {
         NumberFormat formatter = new DecimalFormat("#0.00");
         double[] v = this.resoudreSys();
@@ -256,6 +253,9 @@ public class Treillis {
         }
         System.out.println("");
     }
+    
+//Remplie une chaine de caracteres avec la matrice et son vecteur des forces, la
+//résolution du système, le cout du treillis et les barres susceptible de casser.
     public String calculToString() {
         String s=new String();
         NumberFormat formatter = new DecimalFormat("#0.00");
@@ -282,8 +282,11 @@ public class Treillis {
         }
         return s;
     }
+    
+//Renvoie une chaine de caractères contenant les attributs du treillis pour pouvoir
+//l'enregister dans un fichier texte
     public String treilliToString(){
-        String s=new String();
+        String s;
         String Newligne=System.getProperty("line.separator");
         s="Noeuds :"+Newligne;
         for (int i = 0; i < this.noeuds.size(); i++) {
@@ -295,6 +298,8 @@ public class Treillis {
         }
         return s;
     }
+    
+//Renvoie la position de la tension de la barre donnée dans la liste des inconnues
     public int numVar(ArrayList<String> inconnues, Barre b) {
         int pos = this.barres.indexOf(b);
         int i = 0;
@@ -308,6 +313,7 @@ public class Treillis {
         }
     }
 
+//Renvoie la position de la réaction dans le noeud donnée dans la liste des inconnues
     public int numVar(ArrayList<String> inconnues, Noeud n) {
         int pos = this.noeuds.indexOf(n);
         int i = 0;
@@ -363,7 +369,7 @@ public class Treillis {
             g.getChildren().add(this.noeuds.get(i).dessine());
         }
         for (int i = 0; i < this.barres.size(); i++) {
-            g.getChildren().add(this.barres.get(i).dessine(this.barreCasse()));
+            g.getChildren().add(this.barres.get(i).dessine());
         }
         return g;
     }

@@ -14,9 +14,8 @@ public class Projet_Treillis extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Treillis");
-//        MainPanel main = new MainPanel();
         Treillis treilli = new Treillis();
-        treilli = Treillis.treilliTest();
+//        treilli = Treillis.treilliTest();
         Scene scene = new Scene(new MainPanel(treilli),850 , 500);
         primaryStage.setScene(scene);
         primaryStage.show();

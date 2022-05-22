@@ -5,7 +5,6 @@
 package fr.insa.papama.tp;
 
 import javafx.scene.Group;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 
 

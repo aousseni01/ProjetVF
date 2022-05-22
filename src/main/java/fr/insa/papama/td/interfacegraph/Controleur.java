@@ -8,7 +8,6 @@ import fr.insa.papama.tp.Barre;
 import fr.insa.papama.tp.Noeud;
 import java.util.Optional;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 
 
 /**
