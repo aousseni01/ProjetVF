@@ -293,7 +293,7 @@ public class Treillis {
             s=s+this.noeuds.get(i)+Newligne;
         }
         s=s+"Barres :"+Newligne;
-        for (int i = 0; i < this.barreCasse().size() ; i++) {
+        for (int i = 0; i < this.barres.size() ; i++) {
             s=s+this.barres.get(i)+Newligne;
         }
         return s;

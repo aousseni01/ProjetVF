@@ -7,7 +7,6 @@ package fr.insa.papama.td.interfacegraph;
 import fr.insa.papama.tp.Noeud;
 import fr.insa.papama.tp.NoeudSimple;
 import fr.insa.papama.tp.Vecteur2D;
-import java.util.Optional;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;

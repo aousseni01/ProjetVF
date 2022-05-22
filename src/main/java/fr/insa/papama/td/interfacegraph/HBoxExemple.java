@@ -60,21 +60,6 @@ public class HBoxExemple extends HBox {
    private void save(File f,Treillis t) {
        try (BufferedWriter bout = new BufferedWriter(new FileWriter(f))) {
            bout.write(t.treilliToString());
-//           bout.newLine();
-//           bout.write("NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0)");
-//           bout.newLine();
-//           bout.write("NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0");
-//           bout.newLine();
-//           bout.write("NoeudSimple3 = (100.0;100.0), (0.0;-1000.0)");
-//           bout.newLine();
-//           bout.write("Barres : ");
-//           bout.newLine();
-//           bout.write("Barre0 = NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0) ; NoeudSimple3 = (100.0;100.0), (0.0;-1000.0)Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
-//           bout.newLine();
-//           bout.write("Barre1 = NoeudSimple3 = (100.0;100.0), (0.0;-1000.0) ; NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
-//           bout.newLine();
-//           bout.write("Barre2 = NoeudAppuiDouble1 = (0.0;200.0), (0.0;0.0) ; NoeudAppuisSimple2 = (0.0;0.0), (0.0;0.0)Angle de la normale0.0Traction max = 0.0; Compression max = 0.0; Co�t = 0.0");
-//           bout.newLine();
            this.fichierCourant = f;
        } catch (IOException ex) {
            Alert alert = new Alert(Alert.AlertType.ERROR);
