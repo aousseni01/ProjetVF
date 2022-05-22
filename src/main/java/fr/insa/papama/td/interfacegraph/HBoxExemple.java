@@ -34,13 +34,6 @@ public class HBoxExemple extends HBox {
   
     
     public HBoxExemple(Treillis treilli) {
-//        List<Button> listedeboutonsH = new ArrayList<>();
-//        Button jb5 = new Button ("Créer");
-//        listedeboutonsH.add(jb5);
-//        Button jb6 = new Button ("Supprimer");
-//        listedeboutonsH.add(jb6);
-//        this.getChildren().addAll(jb5,jb6);
-
         this.enregistrer = new Button("Enregistrer"); 
         this.enregistrer.setOnAction((t) -> {
             System.out.println("Clic sur le Bouton Enregistrer");
